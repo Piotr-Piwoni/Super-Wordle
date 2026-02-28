@@ -1,0 +1,6 @@
+res://scenes/main.tscn
+res://componenets/wordle_word.tscn
+res://_script/WordleWord.cs
+res://_script/WordlePiece.cs
+res://componenets/wordle_piece.tscn
+res://_script/GameManager.cs

@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b1qn5mfm80teh"]
+
+[ext_resource type="Script" uid="uid://du3lwo3mabpgb" path="res://_script/GameManager.cs" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://bqh2l27g0onkc" path="res://componenets/wordle_word.tscn" id="2_0wfyh"]
+
+[node name="Main" type="Node2D" unique_id=1096950206 node_paths=PackedStringArray("_Canvas")]
+script = ExtResource("1_o5qli")
+_WordleWordScene = ExtResource("2_0wfyh")
+_Canvas = NodePath("CanvasLayer")
+_WordLists = Array[String](["res://world_lists/words_5.txt", "res://world_lists/words_6.txt", "res://world_lists/words_7.txt", "res://world_lists/words_8.txt", "res://world_lists/words_9.txt"])
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1515293058]

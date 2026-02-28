@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c0v3mmot2w6no"]
+
+[ext_resource type="Script" uid="uid://6b6oonto2ksv" path="res://_script/WordlePiece.cs" id="1_0gh5a"]
+
+[sub_resource type="Theme" id="Theme_o5qli"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o5qli"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0wfyh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sugp2"]
+
+[node name="WordlePiece" type="ColorRect" unique_id=855026326]
+custom_minimum_size = Vector2(100, 100)
+anchors_preset = -1
+anchor_right = 0.052083332
+anchor_bottom = 0.09259259
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_0gh5a")
+metadata/_edit_use_anchors_ = true
+
+[node name="LineEdit" type="LineEdit" parent="." unique_id=771100842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_o5qli")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0, 0, 0, 0.39215687)
+theme_override_colors/caret_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_constants/minimum_character_width = 1
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_o5qli")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_0wfyh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sugp2")
+placeholder_text = "A"
+alignment = 1
+max_length = 1
+context_menu_enabled = false
+emoji_menu_enabled = false
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+selecting_enabled = false
+flat = true
+virtual_keyboard_enabled = false
+caret_blink = true
