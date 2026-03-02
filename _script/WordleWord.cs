@@ -41,7 +41,10 @@ public partial class WordleWord : Control
 		// Construct the full word from the fragments.
 		var finalWord = new StringBuilder();
 		foreach (WordFragment fragment in WordFragments)
+		{
+			fragment.FocusMode = FocusModeEnum.None;
 			finalWord.Append(fragment.Text);
+		}
 
 		EmitSignalWordSubmitted(finalWord.ToString());
 	}
