@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bqh2l27g0onkc"]
 
 [ext_resource type="Script" uid="uid://c6t5mvunopw40" path="res://_script/WordleWord.cs" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://c0v3mmot2w6no" path="res://componenets/wordle_piece.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://c0v3mmot2w6no" path="res://componenets/word_fragment.tscn" id="2_niq8d"]
 
 [node name="WordleWord" type="Control" unique_id=1927032280]
 custom_minimum_size = Vector2(300, 200)
@@ -12,7 +12,7 @@ grow_horizontal = 2
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 3
 script = ExtResource("1_0wfyh")
-_WordlePieceScene = ExtResource("1_o5qli")
+_WordFragmentComponent = ExtResource("2_niq8d")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1275846382]
 layout_mode = 1

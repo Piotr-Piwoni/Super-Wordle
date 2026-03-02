@@ -9,7 +9,7 @@ public partial class GameManager : Node
 	public string CurrentWord { get; private set; } = "";
 
 	[Export]
-	private PackedScene _WordleWordScene;
+	private PackedScene _WordleWordComponent;
 	[Export]
 	private CanvasLayer _Canvas;
 	[Export(PropertyHint.ArrayType, "Path to the word lists.")]
@@ -29,12 +29,19 @@ public partial class GameManager : Node
 		GD.Randomize();
 		PickWord();
 
-		var wordRow = _WordleWordScene.Instantiate<WordleWord>();
+		var wordRow = _WordleWordComponent.Instantiate<WordleWord>();
 		_Canvas.AddChild(wordRow);
 
+		wordRow.WordSubmitted += OnWordSubmitted;
 		wordRow.Generate(CurrentWord.Length);
 
 		_CurrentRow = wordRow;
+	}
+
+
+	private void OnWordSubmitted(string submittedWord)
+	{
+		GD.Print(submittedWord);
 	}
 
 	private void PickWord()

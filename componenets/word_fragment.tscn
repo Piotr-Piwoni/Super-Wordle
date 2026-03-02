@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0v3mmot2w6no"]
 
-[ext_resource type="Script" uid="uid://6b6oonto2ksv" path="res://_script/WordlePiece.cs" id="1_0gh5a"]
+[ext_resource type="Script" uid="uid://6b6oonto2ksv" path="res://_script/WordFragment.cs" id="1_3w6tn"]
 
 [sub_resource type="Theme" id="Theme_o5qli"]
 
@@ -10,7 +10,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sugp2"]
 
-[node name="WordlePiece" type="ColorRect" unique_id=855026326]
+[node name="Fragment" type="ColorRect" unique_id=855026326]
 custom_minimum_size = Vector2(100, 100)
 anchors_preset = -1
 anchor_right = 0.052083332
@@ -18,7 +18,7 @@ anchor_bottom = 0.09259259
 pivot_offset_ratio = Vector2(0.5, 0.5)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("1_0gh5a")
+script = ExtResource("1_3w6tn")
 metadata/_edit_use_anchors_ = true
 
 [node name="LineEdit" type="LineEdit" parent="." unique_id=771100842]
@@ -40,11 +40,13 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_sugp2")
 placeholder_text = "A"
 alignment = 1
 max_length = 1
+keep_editing_on_text_submit = true
 context_menu_enabled = false
 emoji_menu_enabled = false
 shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 selecting_enabled = false
+drag_and_drop_selection_enabled = false
 flat = true
 virtual_keyboard_enabled = false
 caret_blink = true
