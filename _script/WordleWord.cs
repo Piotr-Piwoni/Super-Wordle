@@ -80,11 +80,10 @@ public partial class WordleWord : Control
 
 	public void Generate(int letterAmount)
 	{
-		var container = GetChild<HBoxContainer>(0);
 		for (var i = 0; i < letterAmount; i++)
 		{
 			var piece = _WordFragmentComponent.Instantiate<WordFragment>();
-			container.AddChild(piece);
+			AddChild(piece);
 			WordFragments.Add(piece);
 		}
 

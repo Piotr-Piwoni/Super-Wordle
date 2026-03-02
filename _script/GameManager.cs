@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Godot;
+using Godot.Collections;
 
 namespace Mummoth;
 
@@ -13,9 +14,12 @@ public partial class GameManager : Node
 	[Export]
 	private CanvasLayer _Canvas;
 	[Export(PropertyHint.ArrayType, "Path to the word lists.")]
-	private Godot.Collections.Array<string> _WordLists = [];
+	private Array<string> _WordLists = [];
+	[Export]
+	private int _NumberOfRows = 3;
 
 	private WordleWord _CurrentRow;
+	private WordleWord[] _WordRows;
 
 
 	public override void _Ready()
@@ -29,13 +33,20 @@ public partial class GameManager : Node
 		GD.Randomize();
 		PickWord();
 
-		var wordRow = _WordleWordComponent.Instantiate<WordleWord>();
-		_Canvas.AddChild(wordRow);
+		// Created word rows based on the number of rows allowed.
+		_WordRows = new WordleWord[_NumberOfRows];
+		for (var i = 0; i < _NumberOfRows; i++)
+		{
+			var wordRow = _WordleWordComponent.Instantiate<WordleWord>();
+			_Canvas.GetChild(0).AddChild(wordRow); //< Add it to the Vertical Container.
 
-		wordRow.WordSubmitted += OnWordSubmitted;
-		wordRow.Generate(CurrentWord.Length);
+			wordRow.WordSubmitted += OnWordSubmitted;
+			wordRow.Generate(CurrentWord.Length);
 
-		_CurrentRow = wordRow;
+			_WordRows[i] = wordRow;
+		}
+
+		_CurrentRow = _WordRows.First();
 	}
 
 
