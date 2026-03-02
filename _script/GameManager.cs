@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using Godot.Collections;
@@ -18,18 +19,12 @@ public partial class GameManager : Node
 	[Export]
 	private int _NumberOfRows = 3;
 
-	private WordleWord _CurrentRow;
+	private int _CurrentRow;
 	private WordleWord[] _WordRows;
 
 
 	public override void _Ready()
 	{
-		if (_WordLists.Count == 0)
-		{
-			GD.PrintErr("At least one word list needs to be assigned!");
-			return;
-		}
-
 		GD.Randomize();
 		PickWord();
 
@@ -46,13 +41,68 @@ public partial class GameManager : Node
 			_WordRows[i] = wordRow;
 		}
 
-		_CurrentRow = _WordRows.First();
+		// Enable the current row.
+		_WordRows[_CurrentRow].SetEnable(true);
 	}
 
 
 	private void OnWordSubmitted(string submittedWord)
 	{
-		GD.Print(submittedWord);
+		List<int> correctLetters = [];
+		List<int> incorrectLetters = [];
+		List<int> wrongPositionedLetters = [];
+
+		var targetMatched = new bool[CurrentWord.Length];
+		// Find the correct letters.
+		for (var i = 0; i < CurrentWord.Length; i++)
+		{
+			if (submittedWord[i] != CurrentWord[i]) continue;
+			correctLetters.Add(i);
+			targetMatched[i] = true;
+		}
+
+		// Find the correct letter but in wrong positions.
+		for (var letter = 0; letter < CurrentWord.Length; letter++)
+		{
+			if (correctLetters.Contains(letter)) continue;
+
+			var found = false;
+			for (var targetLetter = 0; targetLetter < CurrentWord.Length; targetLetter++)
+			{
+				if (submittedWord[letter] != CurrentWord[targetLetter] ||
+					targetMatched[targetLetter]) continue;
+
+				wrongPositionedLetters.Add(letter);
+				targetMatched[targetLetter] = true;
+				found = true;
+				break;
+			}
+
+			if (!found) incorrectLetters.Add(letter);
+		}
+
+		// Update the state of the letters.
+		for (var i = 0; i < _WordRows[_CurrentRow].WordFragments.Count; i++)
+		{
+			WordFragment fragment = _WordRows[_CurrentRow].WordFragments[i];
+			if (correctLetters.Contains(i))
+				fragment.UpdateState(WordFragment.WordFragmentState.Correct);
+			else if (incorrectLetters.Contains(i))
+				fragment.UpdateState(WordFragment.WordFragmentState.Incorrect);
+			else if (wrongPositionedLetters.Contains(i))
+				fragment.UpdateState(WordFragment.WordFragmentState.WrongPosition);
+		}
+
+		// Move onto the next row if possible.
+		_WordRows[_CurrentRow].SetEnable(false);
+		if (_CurrentRow == _WordRows.Length - 1)
+		{
+			GD.Print("Game Over!");
+			return;
+		}
+
+		_CurrentRow++;
+		_WordRows[_CurrentRow].SetEnable(true);
 	}
 
 	private void PickWord()

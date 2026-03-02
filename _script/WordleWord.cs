@@ -16,10 +16,13 @@ public partial class WordleWord : Control
 	private PackedScene _WordFragmentComponent;
 
 	private int _SelectedFragment;
+	private bool _IsEnabled;
 
 
 	public override void _Input(InputEvent @event)
 	{
+		if (!_IsEnabled) return;
+
 		if (Input.IsActionJustPressed("ui_text_submit"))
 			SubmitWord();
 
@@ -52,6 +55,7 @@ public partial class WordleWord : Control
 
 	private void OnTextChanged(WordFragment obj)
 	{
+		if (!_IsEnabled) return;
 		if (obj == WordFragments.Last()) return;
 		WordFragments[_SelectedFragment].SetEditingMode(false);
 
@@ -61,6 +65,8 @@ public partial class WordleWord : Control
 
 	private void OnSelected(WordFragment obj)
 	{
+		if (!_IsEnabled) return;
+
 		int index = WordFragments.IndexOf(obj);
 		if (index == _SelectedFragment) return;
 
@@ -92,5 +98,12 @@ public partial class WordleWord : Control
 			piece.Selected += OnSelected;
 			piece.TextChanged += OnTextChanged;
 		}
+	}
+
+	public void SetEnable(bool val)
+	{
+		_IsEnabled = val;
+		foreach (WordFragment fragment in WordFragments)
+			fragment.SetEditingMode(val);
 	}
 }
