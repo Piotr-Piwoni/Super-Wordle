@@ -8,16 +8,16 @@ namespace Mummoth;
 
 public partial class GameManager : Node
 {
-	public string CurrentWord { get; private set; } = "";
+	public string CurrentWord { get; private set; } = string.Empty;
 
 	[Export]
 	private PackedScene _WordleWordComponent;
 	[Export]
 	private CanvasLayer _Canvas;
-	[Export(PropertyHint.ArrayType, "Path to the word lists.")]
-	private Array<string> _WordLists = [];
 	[Export]
 	private int _NumberOfRows = 3;
+	[Export(PropertyHint.Dir)]
+	private string _WordListFolderPath = string.Empty;
 
 	private int _CurrentRow;
 	private WordleWord[] _WordRows;
@@ -107,9 +107,25 @@ public partial class GameManager : Node
 
 	private void PickWord()
 	{
-		string pickedWordListPath = _WordLists.PickRandom();
-		FileAccess wordListFile = FileAccess.Open(pickedWordListPath,
-												  FileAccess.ModeFlags.Read);
+		// Try and obtain the word list files.
+		DirAccess wordListDir = DirAccess.Open(_WordListFolderPath);
+		if (wordListDir == null)
+		{
+			GD.PrintErr("The provided Word List Directory either doesn't exist " +
+						"or can't be opened!");
+			return;
+		}
+
+		List<string> wordLists = wordListDir.GetFiles().ToList();
+
+		// Randomly pick a list.
+		int randomIndex = GD.RandRange(0, wordLists.Count - 1);
+		string pickedWordListPath = wordLists[randomIndex];
+
+		// Access the lists content.
+		var listPath = $"{wordListDir.GetCurrentDir()}/{pickedWordListPath}";
+		FileAccess wordListFile = FileAccess.Open(listPath, FileAccess.ModeFlags.Read);
+
 		// Read file.
 		var wordList = string.Empty;
 		if (wordListFile.IsOpen())

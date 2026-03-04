@@ -7,7 +7,7 @@
 script = ExtResource("1_o5qli")
 _WordleWordComponent = ExtResource("2_0wfyh")
 _Canvas = NodePath("CanvasLayer")
-_WordLists = Array[String](["res://world_lists/words_5.txt", "res://world_lists/words_6.txt", "res://world_lists/words_7.txt", "res://world_lists/words_8.txt", "res://world_lists/words_9.txt"])
+_WordListFolderPath = "res://world_lists"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1515293058]
 
