@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Super Wordle"
-run/main_scene="uid://b1qn5mfm80teh"
+run/main_scene="uid://dp25m6vffnbxo"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 

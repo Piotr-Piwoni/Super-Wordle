@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dp25m6vffnbxo"]
+
+[ext_resource type="Script" uid="uid://cl3xtuv5xjl0y" path="res://_script/MainMenu.cs" id="1_ekxnf"]
+[ext_resource type="Theme" uid="uid://b3ugxmx6bmfrv" path="res://resources/themes/sw_button_flat.tres" id="1_l6cm7"]
+
+[node name="MainMenu" type="Node" unique_id=2088493862 node_paths=PackedStringArray("_NewGameBtn", "_QuitBtn")]
+script = ExtResource("1_ekxnf")
+_NewGameBtn = NodePath("CanvasLayer/BG/VBoxContainer/ButtonContainer/NewGameBtn")
+_QuitBtn = NodePath("CanvasLayer/BG/VBoxContainer/ButtonContainer/QuitBtn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=483358739]
+
+[node name="BG" type="ColorRect" parent="CanvasLayer" unique_id=1562829862]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.084000014, 0.48719996, 0.84, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BG" unique_id=1370589998]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.30046296
+anchor_right = 1.0
+anchor_bottom = 0.69953704
+offset_top = 53.0
+offset_bottom = -53.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 110
+alignment = 1
+
+[node name="Title" type="RichTextLabel" parent="CanvasLayer/BG/VBoxContainer" unique_id=447464145]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 128
+text = "Super Wordle!"
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/BG/VBoxContainer" unique_id=755431538]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="NewGameBtn" type="Button" parent="CanvasLayer/BG/VBoxContainer/ButtonContainer" unique_id=722171405]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 45
+text = "New Game"
+
+[node name="QuitBtn" type="Button" parent="CanvasLayer/BG/VBoxContainer/ButtonContainer" unique_id=1859835871]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_l6cm7")
+theme_override_font_sizes/font_size = 45
+text = "Quit"
