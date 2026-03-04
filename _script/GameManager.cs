@@ -30,10 +30,11 @@ public partial class GameManager : Node
 
 		// Created word rows based on the number of rows allowed.
 		_WordRows = new WordleWord[_NumberOfRows];
+		Node container = _Canvas.FindChildren("*", "VBoxContainer", false)[0];
 		for (var i = 0; i < _NumberOfRows; i++)
 		{
 			var wordRow = _WordleWordComponent.Instantiate<WordleWord>();
-			_Canvas.GetChild(0).AddChild(wordRow); //< Add it to the Vertical Container.
+			container.AddChild(wordRow);
 
 			wordRow.WordSubmitted += OnWordSubmitted;
 			wordRow.Generate(CurrentWord.Length);
